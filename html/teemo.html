@@ -6,64 +6,58 @@
     <title>Teemo - the Swift Scout</title>
     <!-- read with utf-8 -->
     <meta characters="utf-8">
-    <!-- ordered list (parent) -->
-    <style>
-        a {
-            color: green;
-            /* remove line(decoration) */
-            font-size: 20px;
-        }
-        h1 {
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1><a href="index.html" style="color: black; text-decoration: none; font-size: 70px;">Champions</a></h1>
-    <ol>
-        <!-- list (child) -->
-        <li><a href="teemo.html">Teemo</a></li>
-        <li><a href="ashe.html">Ashe</a></li>
-        <li><a href="rakan.html">Rakan</a></li>
-    </ol>
-    <!-- heading element -->
-    <!--<h2>the Swift Scout, <u><font color="Green">Teemo(티모)</font></u></h2>-->
-    <h2>the Swift Scout, <u>Teemo(티모)</u></h2>
-    <!-- attribute -->
-    <img src="Teemo.jpg" width=500>
-    <!-- css property -->
-    <p style="margin-top: 30px">Undeterred by even the most dangerous and threatening of obstacles, 
-    <!-- hyper link with attribute opening new tab and adding description -->
-    <a href="https://www.leagueoflegends.com/en-us/champions/teemo/" target="_blank" title="League of Legends">Teemo</a> scouts the world with boundless enthusiasm and a cheerful spirit.<br>
-    A yordle with an unwavering sense of morality, he takes pride in following the Bandle Scout's Code, sometimes with such eagerness that he is unaware of the broader consequences of 
-    his actions.<br>
-    Though some say the existence of the Scouts is questionable, one thing is for certain: Teemo's conviction is nothing to be trifled with.<br></p>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/Qj48qHM1MXE" title="YouTube video player" frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    <!-- paragraph and new line -->
-    <p style="margin-top: 30px">PASSIVE<br>
-    GUERRILLA WARFARE<br>
-    If Teemo stands still and takes no actions for a short duration, he becomes Invisible indefinitely.<br>
-    If he's in brush, Teemo can enter and maintain his Invisibility while moving.<br>
-    After leaving Invisibility, Teemo gains the Element of Surprise, increasing his Attack Speed for a few seconds.<br></p>
-    <p style="margin-top: 50px">
+    <div id="grid">
+        <ol>
+            <!-- list (child) -->
+            <li><a href="teemo.html">Teemo</a></li>
+            <li><a href="ashe.html">Ashe</a></li>
+            <li><a href="rakan.html">Rakan</a></li>
+        </ol>
+        <div id="article">
+            <!-- heading element -->
+            <!--<h2>the Swift Scout, <u><font color="Green">Teemo(티모)</font></u></h2>-->
+            <h2>the Swift Scout, <u>Teemo(티모)</u></h2>
+            <!-- attribute -->
+            <img src="Teemo.jpg" width=500>
+            <!-- css property -->
+            <p style="margin-top: 30px">Undeterred by even the most dangerous and threatening of obstacles, 
+            <!-- hyper link with attribute opening new tab and adding description -->
+            <a href="https://www.leagueoflegends.com/en-us/champions/teemo/" target="_blank" title="League of Legends">Teemo</a> scouts the world with boundless enthusiasm and a cheerful spirit.<br>
+            A yordle with an unwavering sense of morality, he takes pride in following the Bandle Scout's Code, sometimes with such eagerness that he is unaware of the broader consequences of 
+            his actions.<br>
+            Though some say the existence of the Scouts is questionable, one thing is for certain: Teemo's conviction is nothing to be trifled with.<br></p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Qj48qHM1MXE" title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <!-- paragraph and new line -->
+            <p style="margin-top: 30px">PASSIVE<br>
+            GUERRILLA WARFARE<br>
+            If Teemo stands still and takes no actions for a short duration, he becomes Invisible indefinitely.<br>
+            If he's in brush, Teemo can enter and maintain his Invisibility while moving.<br>
+            After leaving Invisibility, Teemo gains the Element of Surprise, increasing his Attack Speed for a few seconds.<br></p>
+        </div>
+        <p style="margin-top: 50px">
         <div id="disqus_thread"></div>
-        <script>
-            /**
-            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-            /*
-            var disqus_config = function () {
-            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-            };
-            */
-            (function() { // DON'T EDIT BELOW THIS LINE
-                var d = document, s = d.createElement('script');
-                s.src = 'https://test-web-hosting-7.disqus.com/embed.js';
-                s.setAttribute('data-timestamp', +new Date());
-                (d.head || d.body).appendChild(s);
-            })();
-        </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></p>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://test-web-hosting-7.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></p>
+    </div>
 </body>

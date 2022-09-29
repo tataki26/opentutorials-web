@@ -2,53 +2,8 @@
 <head>
     <title>Champions - League of Legends</title>
     <meta characters="utf-8">
-    <style>
-        body {
-            margin: 0;
-        }
-        a {
-            color: black;
-            font-size: 20px;
-        }
-        h1 {
-            text-align: center;
-            border-bottom: 2px gray solid;
-            margin: 0;
-            padding: 30px;
-        }
-        ol {
-            border-right: 2px gray solid;
-            font-size: 30px;
-            width: 180px;
-            margin: 0;
-        }
-        #grid{
-            display: grid;
-            /* ol: 150px, image: rest */
-            grid-template-columns: 180px 1fr;
-        }
-        /* parent: grid / child: ol */
-        #grid ol{
-            padding-top: 30px;
-            padding-left: 80px;
-        }
-        #grid #image {
-            padding-top: 25px;
-            padding-left: 110px;
-        }
-        @media(max-width: 800px){
-            #grid{
-                /* move down */
-                display: block;
-            }
-            ol {
-                border-right: none;
-            }
-            h1 {
-                border-bottom: none;
-            }
-        }
-    </style>
+    <!-- link style.css file -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1><a href="index.html" id="active" style="text-decoration: none; font-size: 70px">Champions</a></h1>
