@@ -18,31 +18,37 @@
         }
         ol {
             border-right: 2px gray solid;
-            width: 150px;
+            font-size: 30px;
+            width: 180px;
             margin: 0;
-            padding: 30px 0 0 60px;
         }
-        div {
-            text-align: center;
+        #grid{
+            display: grid;
+            /* ol: 150px, image: rest */
+            grid-template-columns: 180px 1fr;
         }
-        /* class */
-        #active {
-            color: red;
+        /* parent: grid / child: ol */
+        #grid ol{
+            padding-top: 30px;
+            padding-left: 80px;
         }
-        .saw {
-            color: gray;
+        #grid #image {
+            padding-top: 25px;
+            padding-left: 110px;
         }
     </style>
 </head>
 <body>
     <h1><a href="index.html" id="active" style="text-decoration: none; font-size: 70px">Champions</a></h1>
-    <ol>
-        <li><a href="teemo.html" class="saw">Teemo</a></li>
-        <li><a href="ashe.html" class="saw">Ashe</a></li>
-        <li><a href="rakan.html">Rakan</a></li>
-    </ol>
-    <div>
-        <img src="champions.jpg" width=1000>
+    <div id="grid">
+        <ol>
+            <li><a href="teemo.html">Teemo</a></li>
+            <li><a href="ashe.html">Ashe</a></li>
+            <li><a href="rakan.html">Rakan</a></li>
+        </ol>
+        <div id="image">
+            <img src="champions.jpg" width=1000>
+        </div>
     </div>
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
