@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Object</h1>
+    <h2>Create</h2>
+    <script>
+        // 객체 생성
+        let coworkers = {
+            "programmer": "takityaki",
+            "designer": "tataki",
+        };
+        // 객체 접근
+        document.write("programmer: "+coworkers.programmer+"<br>");
+        document.write("designer: "+coworkers.designer+"<br>");
+
+        // 객체 추가
+        // 없는 key에 값을 넣으면 새로운 key-value 생성
+        coworkers.bookkeeper = "taki";
+        document.write("bookkeeper: "+coworkers.bookeeper+"<br>");
+
+        // 대괄호를 사용하면 key에 띄어쓰기 가능
+        coworkers["data scientist"] = "tata";
+        document.write("data scientist: "+coworkers["data scientist"]+"<br>");
+    </script>
+</body>
+</html>
