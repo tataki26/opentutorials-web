@@ -16,16 +16,19 @@
             document.querySelector('body').style.backgroundColor = 'white';
             document.querySelector('body').style.color = 'black';
         ">-->
-        <input id="night_day" type="button" value="Night" onclick="
-            if (document.querySelector('#night_day').value === 'Night'){
-                document.querySelector('#night_day').value = 'Day'
-                document.querySelector('body').style.backgroundColor = 'black';
-                document.querySelector('body').style.color = 'white';
+        <!--<input id="night_day" type="button" value="Night" onclick=" 
+            if (document.querySelector('#night_day').value === 'Night'){-->
+        <input type="button" value="Night" onclick="
+            let target = document.querySelector('body');
+            if(this.value === 'Night'){
+                this.value = 'Day'
+                target.style.backgroundColor = 'black';
+                target.style.color = 'white';
             }
             else {
-                document.querySelector('#night_day').value = 'Night';
-                document.querySelector('body').style.backgroundColor = 'white';
-                document.querySelector('body').style.color = 'black';
+                this.value = 'Night';
+                target.style.backgroundColor = 'white';
+                target.style.color = 'black';
             }
         ">
         <p>Press button and change the background color of your webpage!</p> 
