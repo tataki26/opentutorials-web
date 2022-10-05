@@ -33,5 +33,17 @@
             document.write(key+' - '+coworkers[key]+'<br>');
         }
     </script>
+    <h2>Property & Method</h2>
+    <script>
+        // property: 객체에 소속된 변수
+        // method: 객체에 소속된 함수
+        coworkers.showAll = function() {
+            // this: 함수 안에서 해당 함수가 소속되어 있는 객체를 가리킴
+            for(let key in this) {
+            document.write(key+' - '+this[key]+'<br>');
+            }
+        };
+        coworkers.showAll();
+    </script>
 </body>
 </html>
