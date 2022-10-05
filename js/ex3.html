@@ -3,43 +3,38 @@
     <head>
         <meta charset="UTF-8">
         <title>Document</title>
+        <script>
+            // 기존에 사용하던 this를 그대로 두면 전역 변수로서 window를 받게 된다
+            // 매개변수를 통해 JS가 적용될 태그를 가리키는 this를 사용하도록 한다
+            function nightDayHandler(self) {
+                let target = document.querySelector('body');
+                if(self.value === 'Night'){
+                    self.value = 'Day'
+                    target.style.backgroundColor = 'black';
+                    target.style.color = 'white';
+
+                    let alist = document.querySelectorAll('a');
+                    for(let i = 0; i < alist.length; i++){
+                        alist[i].style.color = 'powderblue';
+                    };
+                }
+                else {
+                    self.value = 'Night';
+                    target.style.backgroundColor = 'white';
+                    target.style.color = 'black';
+
+                    let alist = document.querySelectorAll('a');
+                    for(let i = 0; i < alist.length; i++){
+                        alist[i].style.color = 'blue';
+                    };
+                }
+            }
+        </script>
     </head>
     <body>
         <h1>Night and Day</h1>
-        <!--<input type="button" value="Night" onclick="
-            // write js code here
-            // select tag
-            document.querySelector('body').style.backgroundColor = 'black';
-            document.querySelector('body').style.color = 'white';
-        ">
-        <input type="button" value="Day" onclick="
-            document.querySelector('body').style.backgroundColor = 'white';
-            document.querySelector('body').style.color = 'black';
-        ">-->
-        <!--<input id="night_day" type="button" value="Night" onclick=" 
-            if (document.querySelector('#night_day').value === 'Night'){-->
         <input type="button" value="Night" onclick="
-            let target = document.querySelector('body');
-            if(this.value === 'Night'){
-                this.value = 'Day'
-                target.style.backgroundColor = 'black';
-                target.style.color = 'white';
-
-                var alist = document.querySelectorAll('a');
-                for(var i = 0; i < alist.length; i++){
-                    alist[i].style.color = 'powderblue';
-                };
-            }
-            else {
-                this.value = 'Night';
-                target.style.backgroundColor = 'white';
-                target.style.color = 'black';
-
-                var alist = document.querySelectorAll('a');
-                for(var i = 0; i < alist.length; i++){
-                    alist[i].style.color = 'blue';
-                };
-            }
+           nightDayHandler(this); 
         ">
         <p>Press button and change the background color of your webpage!</p>
         <p>You can also change the color of link!</p>
