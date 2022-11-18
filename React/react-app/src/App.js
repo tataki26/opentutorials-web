@@ -5,7 +5,12 @@ import './App.css';
 // 반드시 대문자로 정의
 function Header(props) {
   return <header>
-    <h1><a href="/">{props.title}</a></h1>
+    <h1><a href="/" onClick={(event)=>{
+      // 기본 동작 방지
+      // 클릭해도 리로드 되지 않음
+      event.preventDefault();
+      props.onChangeMode();
+    }}>{props.title}</a></h1>
   </header>
 }
 
@@ -19,7 +24,14 @@ function Nav(props) {
 
   for (let i=0; i<props.topics.length; i++) {
     let t = props.topics[i];
-    lis.push(<li key={t.id}><a href={'/read/'+t.id}>{t.title}</a></li>)
+    lis.push(<li key={t.id}>
+      <a id={t.id} href={'/read/'+t.id} onClick={(event)=>{
+        event.preventDefault();
+        // target: 이벤트를 유발시킨 태그(a)
+        // a 태그 옆 id는 파라미터로 사용될 변수명
+        props.onChangeMode(event.target.id);
+      }}>{t.title}</a>
+      </li>)
   }
 
   return <nav>
@@ -44,8 +56,12 @@ function App() {
   ]
   return (
     <div>
-      <Header title="WEB"></Header>
-      <Nav topics={topics}></Nav>
+      <Header title="WEB" onChangeMode={()=>{
+        alert('Header');
+      }}></Header>
+      <Nav topics={topics} onChangeMode={(id)=>{
+        alert(id);
+      }}></Nav>
       <Article title="Welcome" body="Hello, WEB"></Article>
       <Article title="Hi" body="Hello, React"></Article>
       </div>
