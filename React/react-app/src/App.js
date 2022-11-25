@@ -50,6 +50,28 @@ function Article(props) {
   </article>
 }
 
+function Create(props) {
+  return <article>
+    <h2>Create</h2>
+    {/* onSubmit: submit 버튼을 클릭했을 때, form tag에서 발생하는 이벤트 */}
+    <form onSubmit={event => {
+      event.preventDefault();
+      // form tag에 소속되어 있는 value 값 가져오기
+      // event.target: 이벤트가 발생한 태그 (form tag)
+      const title = event.target.title.value;
+      const body = event.target.body.value;
+      props.onCreate(title, body);
+    }}>
+      {/* title: 사용자가 입력한 data의 이름 */}
+      <p><input type="text" name="title" placeholder="title"/></p>
+      {/* textarea: 여러 줄 표시 */}
+      <p><textarea name="body" placeholder="body"></textarea></p>
+      {/* submit: 전송 버튼 */}
+      <p><input type="submit" value="Create"></input></p>
+    </form>
+  </article>
+}
+
 function App() {
   // 상태 생성
   // 상태를 리턴하는 함수 useState
@@ -62,11 +84,14 @@ function App() {
   const [mode, setMode] = useState('WELCOME');
   // 새로운 id 값 지정
   const [id, setId] = useState(null);
-  const topics = [
+  // 3까지는 이미 완성되어 있으니 4부터 시작
+  const [nextId, setNextId] = useState(4);
+  // topics 값 변경할 수 있도록 상태(state)로 승격
+  const [topics, setTopics] = useState([
     {id: 1, title: 'html', body: 'html is ...'},
     {id: 2, title: 'css', body: 'css is ...'},
     {id: 3, title: 'js', body: 'js is ...'},
-  ]
+  ]);
   let content = null;
   // mode에 따라 내용이 달라짐
   if (mode === 'WELCOME') {
@@ -81,6 +106,18 @@ function App() {
       }
     }
     content = <Article title={title} body={body}></Article>
+  } else if (mode === 'CREATE') {
+    content = <Create onCreate={(_title, _body) => {
+      const newTopic = {id: nextId, title:_title, body: _body}
+      // topics의 복제본 생성
+      const newTopics = [...topics]
+      newTopics.push(newTopic);
+      // 기존 객체와 새로운 객체를 비교하여 그 값이 다르면 컴포넌트 재실행
+      setTopics(newTopics);
+      setMode('READ');
+      setId(nextId);
+      setNextId(nextId+1);
+    }}></Create>
   }
   return (
     <div>
@@ -96,6 +133,10 @@ function App() {
         setId(_id);
       }}></Nav>
       {content}
+      <a href="/create" onClick={event=>{
+        event.preventDefault();
+        setMode('CREATE');
+      }}>Create</a>
       </div>
   );
 }
