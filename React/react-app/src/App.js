@@ -4,13 +4,17 @@ import {useState} from 'react';
 
 // component - 사용자 정의 태그
 // 반드시 대문자로 정의
-function Header(props) {
+// prop - 컴포넌트의 속성, 입력값(ex:) img 태그의 src)
+// 컴포넌트의 파라미터로 prop을 넘김(변수 같이 사용 가능)
+function Header(props) { // props: 객체(title: "WEB")
   return <header>
     <h1><a href="/" onClick={(event)=>{
       // 기본 동작 방지
       // 클릭해도 리로드 되지 않음
       event.preventDefault();
       props.onChangeMode();
+      // 중괄호 안은 표현식으로 취급(변수 접근 방법)
+      // 값 할당은 컴포넌트 호출 시에 이루어진다
     }}>{props.title}</a></h1>
   </header>
 }
@@ -18,14 +22,25 @@ function Header(props) {
 function Nav(props) {
   const lis = []
   /*
+  const lis = [
     <li><a href="/read/1">html</a></li>,
     <li><a href="/read/2">css</a></li>,
     <li><a href="/read/3">js</a></li>
+  ]
   */
 
+  // lis를 하드코딩하지 않고 동적으로 설정하기
+  // <nav> 컴포넌트로 받은 topics 파라미터를 활용하여 순회
   for (let i=0; i<props.topics.length; i++) {
-    let t = props.topics[i];
-    lis.push(<li key={t.id}>
+    let t = props.topics[i]; // 단일 topic 객체 {id, title, body}
+    // 원래 코드
+    /*
+    // 동적으로 t.id와 t.title 할당(ex:) 1. html 2. css ...)
+    lis.push(<li><a href={'/read/'+t.id}>{t.title}</a></li>)
+    ==> unique "key" prop error : 자동으로 생성한 태그(li)에 key prop을 추가해야 한다
+    (반복문 안에서 고유한 값)
+    */
+    lis.push(<li key={t.id}> {/* id 고유한 값 */}
       <a id={t.id} href={'/read/'+t.id} onClick={(event)=>{
         event.preventDefault();
         // target: 이벤트를 유발시킨 태그(a)
@@ -39,6 +54,11 @@ function Nav(props) {
   return <nav>
     <ol>
       {lis}
+      {/* lis 배열로 변경
+        <li><a href="/read/1">html</a></li>,
+        <li><a href="/read/2">css</a></li>,
+        <li><a href="/read/3">js</a></li> 
+      */}
     </ol>
   </nav>
 }
@@ -86,6 +106,12 @@ function App() {
   const [id, setId] = useState(null);
   // 3까지는 이미 완성되어 있으니 4부터 시작
   const [nextId, setNextId] = useState(4);
+  // 함수 내에서는 topics 값을 바꿀 수 없다
+  /* const topics = [
+    {id: 1, title: 'html', body: 'html is ...'},
+    {id: 2, title: 'css', body: 'css is ...'},
+    {id: 3, title: 'js', body: 'js is ...'},
+  ]*/
   // topics 값 변경할 수 있도록 상태(state)로 승격
   const [topics, setTopics] = useState([
     {id: 1, title: 'html', body: 'html is ...'},
@@ -121,6 +147,7 @@ function App() {
   }
   return (
     <div>
+      {/* props.title = WEB */}
       <Header title="WEB" onChangeMode={()=>{
         // 변수의 값을 바꿔도 상태는 변하지 않는다
         // mode = 'WELCOME'
@@ -128,6 +155,7 @@ function App() {
         // App 컴포넌트를 다시 실행해서 값이 갱신되는 원리이다
         setMode('WELCOME');
       }}></Header>
+      {/* 중괄호 안 topics는 위에서 정의한 topics 변수 */}
       <Nav topics={topics} onChangeMode={(_id)=>{
         setMode('READ');
         setId(_id);
