@@ -8,10 +8,13 @@ import {useState} from 'react';
 // 컴포넌트의 파라미터로 prop을 넘김(변수 같이 사용 가능)
 function Header(props) { // props: 객체(title: "WEB")
   return <header>
+    {/* header 태그에 onClick 이벤트 걸기 
+        a 태그를 클릭했을 때, 함수 호출
+        함수가 호출될 때, REACT는 event 객체를 첫번째 파라미터로 주입해준다 */}
     <h1><a href="/" onClick={(event)=>{
-      // 기본 동작 방지
-      // 클릭해도 리로드 되지 않음
+      // a 태그의 기본 동작 방지 --> 클릭해도 리로드 되지 않음
       event.preventDefault();
+      // 아래 onChangeMode 함수 호출
       props.onChangeMode();
       // 중괄호 안은 표현식으로 취급(변수 접근 방법)
       // 값 할당은 컴포넌트 호출 시에 이루어진다
@@ -41,10 +44,12 @@ function Nav(props) {
     (반복문 안에서 고유한 값)
     */
     lis.push(<li key={t.id}> {/* id 고유한 값 */}
+      {/* a 태그를 클릭하면 onClick의 함수가 실행 */}
       <a id={t.id} href={'/read/'+t.id} onClick={(event)=>{
         event.preventDefault();
-        // target: 이벤트를 유발시킨 태그(a)
-        // a 태그 옆 id는 파라미터로 사용될 변수명
+        // 아래에서 정의된 onChangeMode ---> id를 파라미터로 받는다
+        // target: 이벤트를 유발시킨 태그(a) --> 이벤트 함수 안에서 a 태그의 id 속성을 가져온다 
+        // a 태그 옆 id는 파라미터로 사용될 변수명을 의미한다
         // 태그의 속성으로 넘길 때 문자열로 바뀌므로 다시 숫자로 변경
         props.onChangeMode(Number(event.target.id));
       }}>{t.title}</a>
@@ -148,6 +153,8 @@ function App() {
   return (
     <div>
       {/* props.title = WEB */}
+      {/* onChangeMode - prop, 인자는 함수
+          Header 컴포넌트 안에서 링크를 클릭하면 인자로 넘긴 함수를 호출한다 */}
       <Header title="WEB" onChangeMode={()=>{
         // 변수의 값을 바꿔도 상태는 변하지 않는다
         // mode = 'WELCOME'
