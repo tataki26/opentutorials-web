@@ -16,12 +16,13 @@
         })
         */
         // Asynchronous
-        function callbackme(){
-            console.log('response end');
-        }
-        fetch('html').then(callbackme);
-        console.log(1);
-        console.log(2);
+        // response 객체: 서버가 브라우저에 보내는 응답(status)의 결과 data
+        fetch('html').then(function(response){
+            console.log(response.status);
+            if(response.status == '404'){
+                alert('Not found');
+            }
+        });
         ">
     </body>
 </html>
