@@ -191,11 +191,27 @@ function App() {
     content = <Article title={title} body={body}></Article>
     // read mode인 경우에만, update 등장
     // update의 고유한 id 추가(but, 클릭해도 url이 바뀌진 않는다 -> 형식 맞추기용)
-    contextControl = <li><a href={"/update/"+id} onClick={event => {
+    // 빈 태그: 그룹핑용 태그
+    contextControl = <>
+    <li><a href={"/update/"+id} onClick={event => {
       event.preventDefault();
       // Update 링크가 눌리면 update mode로 변경
       setMode('UPDATE');
     }}>Update</a></li>
+    {/* 링크를 탈 필요가 없으므로 button으로 구현*/}
+    <li><input type="button" value="Delete" onClick={()=>{
+      const newTopics = []
+      for(let i=0; i<topics.length; i++){
+        // id가 같지 않은 경우에만 push
+        // 같은 id가 빠진 채로 newTopics가 갱신된다
+        if(topics[i].id !== id) {
+          newTopics.push(topics[i]);
+        }
+      }
+      setTopics(newTopics);
+      setMode('WELCOME');
+    }} /></li>
+    </>
   } else if (mode === 'CREATE') {
     content = <Create onCreate={(_title, _body) => {
       const newTopic = {id: nextId, title:_title, body: _body}
