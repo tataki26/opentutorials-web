@@ -98,6 +98,41 @@ function Create(props) {
   </article>
 }
 
+// Update는 Create와 Read가 결합된 하이브리드 형태
+// form 안에는 기존에 입력했던 내용이 올라와있다
+function Update(props) {
+  // props는 사용자의 명령 --> 그대로 두면 form에 입력할 수 없다
+  // prop(외부)을 state(내부)로 승격해야 한다
+  const [title, setTitle] = useState(props.title);
+  const [body, setBody] = useState(props.body);
+  return <article>
+    <h2>Update</h2>
+    {/* onSubmit: submit 버튼을 클릭했을 때, form tag에서 발생하는 이벤트 */}
+    <form onSubmit={event => {
+      event.preventDefault();
+      // form tag에 소속되어 있는 value 값 가져오기
+      // event.target: 이벤트가 발생한 태그 (form tag)
+      const title = event.target.title.value;
+      const body = event.target.body.value;
+      props.onUpdate(title, body);
+    }}>
+      {/* title: 사용자가 입력한 data의 이름 */}
+      {/* html의 onChange: 값이 바뀐 후 마우스 포인터가 밖으로 나가면 호출
+          REACT의 onChange: 값을 입력할 때마다 호출 */}
+      <p><input type="text" name="title" placeholder="title" value={title} onChange={event=>{
+        // title의 value를 타겟팅하여 기존 title 값 변경
+        setTitle(event.target.value);
+      }} /></p>
+      {/* textarea: 여러 줄 표시 */}
+      <p><textarea name="body" placeholder="body" value={body} onChange={event=>{
+        setBody(event.target.value);
+      }}></textarea></p>
+      {/* submit: 전송 버튼 */}
+      <p><input type="submit" value="Update"></input></p>
+    </form>
+  </article> 
+}
+
 /*
 컴포넌트의 입력은 prop, 출력은 처리된 데이터로 만들어지는 UI
 prop은 컴포넌트를 사용하는 외부자를 위한 data
@@ -134,6 +169,10 @@ function App() {
   ]);
   // const mode = 'WELCOME';
   let content = null; // ---> 본문
+  // 맥락적으로 노출되는 UI
+  // Update는 항상 노출되기보다 경우에 따라 노출되는 것이 바람직
+  let contextControl = null;
+
   // mode에 따라 본문(content)이 달라짐
   if (mode === 'WELCOME') {
     content = <Article title="Welcome" body="Hello, WEB"></Article> // welcome page
@@ -150,6 +189,13 @@ function App() {
     }
     // 순회한 결과를 태그에 추가
     content = <Article title={title} body={body}></Article>
+    // read mode인 경우에만, update 등장
+    // update의 고유한 id 추가(but, 클릭해도 url이 바뀌진 않는다 -> 형식 맞추기용)
+    contextControl = <li><a href={"/update/"+id} onClick={event => {
+      event.preventDefault();
+      // Update 링크가 눌리면 update mode로 변경
+      setMode('UPDATE');
+    }}>Update</a></li>
   } else if (mode === 'CREATE') {
     content = <Create onCreate={(_title, _body) => {
       const newTopic = {id: nextId, title:_title, body: _body}
@@ -162,6 +208,31 @@ function App() {
       setId(nextId);
       setNextId(nextId+1);
     }}></Create>
+  } else if (mode === 'UPDATE') {
+    let title, body = null;
+    for(let i=0; i<topics.length; i++){
+      if(topics[i].id === id) { // topics의 id와 id state가 일치하면,
+        title = topics[i].title;
+        body = topics[i].body;
+      }
+    }
+    content = <Update title={title} body={body} onUpdate={(title, body) => {
+      console.log(title, body);
+      // 상태값이 배열이므로 복사 후 업데이트
+      const newTopics = [...topics]
+      const updatedTopic = {id:id, title:title, body:body};
+      for(let i=0; i<newTopics.length; i++){
+        // 새로운 topic의 id와 현재 id가 같다면, 지금 선택한 토픽
+        if(newTopics[i].id === id) {
+          newTopics[i] = updatedTopic;
+          break;
+        }
+      }
+      // topic이 바뀌면서 제목도 함께 바뀐다
+      setTopics(newTopics);
+      // 상세 보기로 이동
+      setMode('READ');
+    }}></Update>
   }
   return (
     <div>
@@ -187,10 +258,13 @@ function App() {
           content 변수로 대체함
           HTML 내부이므로 중괄호로 변수 사용 */}
       {content}
-      <a href="/create" onClick={event=>{
-        event.preventDefault();
-        setMode('CREATE');
-      }}>Create</a>
+      <ul>
+        <li><a href="/create" onClick={event=>{
+          event.preventDefault();
+          setMode('CREATE');
+        }}>Create</a></li>
+        {contextControl}
+      </ul>
       </div>
   );
 }
