@@ -4,6 +4,7 @@
         <article>
         </article>
         <input type="button" value="fetch" onClick="
+        /*
         // 버튼을 누르면 html 파일을 다운로드 받는다
         fetch('html').then(function(response){
             // text 안에 서버가 응답한 data가 있다
@@ -13,6 +14,14 @@
                 document.querySelector('article').innerHTML = text;
             })
         })
+        */
+        // Asynchronous
+        function callbackme(){
+            console.log('response end');
+        }
+        fetch('html').then(callbackme);
+        console.log(1);
+        console.log(2);
         ">
     </body>
 </html>
