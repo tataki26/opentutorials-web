@@ -11,10 +11,7 @@
   <input id="night_day" type="button" value="night" onclick="
     nightDayHandler(this);
   ">
-  <ol>
-    <li><a href="#!html" onclick="fetchPage('html')">HTML</a></li>
-    <li><a href="#!css" onclick="fetchPage('css')">CSS</a></li>
-    <li><a href="#!javascript" onclick="fetchPage('javascript')">JavaScript</a></li>
+  <ol id="nav">
   </ol>
   <article>
   </article>
@@ -31,6 +28,12 @@
     } else {
       fetchPage('welcome');
     }
+    // list 파일의 내용을 id가 nav인 태그 안에 넣어라
+    fetch('list').then(function(response){
+      response.text().then(function(text){
+        document.querySelector('#nav').innerHTML = text;
+      })
+    });
   </script>
 </body>
 </html>
