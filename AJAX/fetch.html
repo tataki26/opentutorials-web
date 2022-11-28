@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <article>
+        </article>
+        <input type="button" value="fetch" onClick="
+        // 버튼을 누르면 html 파일을 다운로드 받는다
+        fetch('html').then(function(response){
+            // text 안에 서버가 응답한 data가 있다
+            response.text().then(function(text){
+                // 최종적으로 실행되는 코드
+                // innerHTML: element 내에 포함된 HTML 또는 XML 마크업을 가져오거나 설정한다
+                document.querySelector('article').innerHTML = text;
+            })
+        })
+        ">
+    </body>
+</html>
