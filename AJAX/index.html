@@ -31,7 +31,18 @@
     // list 파일의 내용을 id가 nav인 태그 안에 넣어라
     fetch('list').then(function(response){
       response.text().then(function(text){
-        document.querySelector('#nav').innerHTML = text;
+        var items = text.split(',');
+        var i = 0;
+        var tags = '';
+        while(i<items.length){
+          var item = items[i];
+          // list 파일에 줄바꿈 등이 포함될 경우를 위해 공백 제거 코드 추가
+          item = item.trim();
+          var tag = '<li><a href="#!'+item+'" onclick="fetchPage(\''+item+'\')">'+item+'</a></li>';
+          tags += tag;
+          i += 1;
+        }
+        document.querySelector('#nav').innerHTML = tags;
       })
     });
   </script>
